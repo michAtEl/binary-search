@@ -1,15 +1,15 @@
 var expect = require("chai").expect;
 
 describe("binarysearch", function() {
-  var bs  = require("./"),
+      var bs  = require("./index.js"),
       arr = [1, 2, 2, 2, 3, 5, 9],
       cmp = function(a, b) { return a - b; };
 
-  it("should bail if not passed an array", function() {
+  it("should fail if not passed an array", function() {
     expect(function() { bs(undefined, 3, cmp); }).to.throw(TypeError);
   });
 
-  it("should bail if not passed a comparator", function() {
+  it("should fail if not passed a comparator", function() {
     expect(function() { bs(arr, 3, undefined); }).to.throw(TypeError);
   });
 
@@ -43,4 +43,21 @@ describe("binarysearch", function() {
     bs(arr, 3, indexCmp);
     expect(indexes).to.deep.equal([3, 5, 4])
   });
+
+
+  describe("first", function() {
+    it("should return the first index of an item in a sorted array", function() {
+      expect(bs.first(arr, 2, cmp)).to.equal(1);
+    });
+
+    it("should return the index of where the item would go plus one, negated, if the item is not found", function() {
+      expect(bs(arr, 4, cmp)).to.equal(-6);
+    });
+  });
+
+  describe("last", function() {
+
+  });
+
+
 });
